@@ -1,7 +1,7 @@
 Name:           hunspell
 Summary:        A spell checker and morphological analyzer library
 Version:        1.7.0
-Release:        3
+Release:        4
 URL:            https://github.com/hunspell/hunspell
 Source:         https://github.com/hunspell/hunspell/archive/%{name}-%{version}.tar.gz
 License:        LGPLv2+ or GPLv2+ or MPLv1.1
@@ -73,7 +73,8 @@ cp -a %{_libdir}/libhunspell-1.6.so* %{buildroot}%{_libdir}
 
 %files -f %{name}.lang
 %defattr(-,root,root)
-%doc COPYING COPYING.LESSER COPYING.MPL AUTHORS license.hunspell license.myspell
+%doc AUTHORS
+%license COPYING COPYING.LESSER COPYING.MPL license.hunspell license.myspell
 %{_bindir}/hunspell
 %{_libdir}/*.so.*
 %{_datadir}/myspell
@@ -93,6 +94,12 @@ cp -a %{_libdir}/libhunspell-1.6.so* %{buildroot}%{_libdir}
 %lang(hu) %{_mandir}/hu/man1/hunspell.1.gz
 
 %changelog
+* Sat Oct 19 2019 openEuler Buildteam <buildteam@openeuler.org> - 1.7.0.4
+- Type:bugfix
+- Id:NA
+- SUG:NA
+- DESC:remove the copying files to license root.
+
 * Tue Sep 24 2019 openEuler Buildteam <buildteam@openeuler.org> - 1.7.0-3
 - Type:bugfix
 - Id:NA

@@ -1,12 +1,12 @@
 Name:           hunspell
 Summary:        A spell checker and morphological analyzer library
 Version:        1.7.0
-Release:        4
+Release:        5
 URL:            https://github.com/hunspell/hunspell
 Source:         https://github.com/hunspell/hunspell/archive/%{name}-%{version}.tar.gz
 License:        LGPLv2+ or GPLv2+ or MPLv1.1
 BuildRequires:  gcc-c++ autoconf automake libtool ncurses-devel gettext
-BuildRequires:  perl-generators words hunspell hunspell-devel
+BuildRequires:  perl-generators words hunspell hunspell-devel gdb
 %ifarch %{ix86} x86_64
 BuildRequires: valgrind
 %endif
@@ -39,24 +39,13 @@ configureflags="--disable-rpath  --with-ui --with-readline"
     CFLAGS="${RPM_OPT_FLAGS} -fprofile-use"\
     CXXFLAGS="${RPM_OPT_FLAGS} -fprofile-use"
 
-head -n $((`cat /usr/share/dict/words | wc -l`/2)) /usr/share/dict/words |\
-    sed '/\//d'> words
-
-%{profilegenerate} %configure $configureflags
-%make_build
-./src/tools/affixcompress words > /dev/null 2>&1
-./src/tools/hunspell -d words -l /usr/share/dict/words > /dev/null
-make check
-make distclean
-
-%{profileuse} %configure $configureflags
+%configure $configureflags
 %make_build
 
 cd po && make %{?_smp_mflags} update-gmo && cd ..
 
 %check
 %ifarch %{ix86} x86_64
-VALGRIND=memcheck make check
 make check
 %endif
 
@@ -94,6 +83,9 @@ cp -a %{_libdir}/libhunspell-1.6.so* %{buildroot}%{_libdir}
 %lang(hu) %{_mandir}/hu/man1/hunspell.1.gz
 
 %changelog
+* Sat Mar 21 2020 songnannan <songnannan2@huawei.com> - 1.7.0.5
+- bugfix about make check
+
 * Sat Oct 19 2019 openEuler Buildteam <buildteam@openeuler.org> - 1.7.0.4
 - Type:bugfix
 - Id:NA

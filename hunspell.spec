@@ -1,9 +1,9 @@
 Name:           hunspell
 Summary:        A spell checker and morphological analyzer library
 Version:        1.7.0
-Release:        5
+Release:        6
 URL:            https://github.com/hunspell/hunspell
-Source:         https://github.com/hunspell/hunspell/archive/%{name}-%{version}.tar.gz
+Source:         https://github.com/hunspell/hunspell/archive/v%{version}.tar.gz
 License:        LGPLv2+ or GPLv2+ or MPLv1.1
 BuildRequires:  gcc-c++ autoconf automake libtool ncurses-devel gettext
 BuildRequires:  perl-generators words hunspell hunspell-devel gdb
@@ -83,6 +83,9 @@ cp -a %{_libdir}/libhunspell-1.6.so* %{buildroot}%{_libdir}
 %lang(hu) %{_mandir}/hu/man1/hunspell.1.gz
 
 %changelog
+* Tue Sep 08 2020 zhanzhimin <zhanzhimin@huawei.com> - 1.7.0-6
+- update source
+
 * Sat Mar 21 2020 songnannan <songnannan2@huawei.com> - 1.7.0.5
 - bugfix about make check
 

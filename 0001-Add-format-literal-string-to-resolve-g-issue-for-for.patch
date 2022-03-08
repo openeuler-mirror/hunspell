@@ -1,0 +1,30 @@
+From 52f16d2654a891e72ceb34d34870ec543a62ca68 Mon Sep 17 00:00:00 2001
+From: Qiang Wei <qiang.wei@suse.com>
+Date: Tue, 8 Mar 2022 10:43:26 +0800
+Subject: [PATCH] Add format literal string to resolve g++ issue for
+ format-security.
+
+In ncruses 6.3 version, if there is no format string in function
+  printw, g++ complaints it with option -Werr=format-security on.
+
+Signed-off-by: Qiang Wei <qiang.wei@suse.com>
+---
+ src/tools/hunspell.cxx | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/tools/hunspell.cxx b/src/tools/hunspell.cxx
+index 690e34a..b165634 100644
+--- a/src/tools/hunspell.cxx
++++ b/src/tools/hunspell.cxx
+@@ -581,7 +581,7 @@ const char* basename(const char* s, char c) {
+ #ifdef HAVE_CURSES_H
+ char* scanline(char* message) {
+   char input[INPUTLEN];
+-  printw(message);
++  printw("%s", message);
+   echo();
+   getnstr(input, INPUTLEN);
+   noecho();
+-- 
+2.26.2
+

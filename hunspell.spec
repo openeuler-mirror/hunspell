@@ -1,11 +1,13 @@
 Name:           hunspell
 Summary:        A spell checker and morphological analyzer library
 Version:        1.7.0
-Release:        9
+Release:        10
 URL:            https://github.com/hunspell/hunspell
 Source:         https://github.com/hunspell/hunspell/archive/v%{version}.tar.gz
 
 Patch1:         backport-CVE-2019-16707.patch
+
+Patch9001:      0001-Add-format-literal-string-to-resolve-g-issue-for-for.patch
 
 License:        LGPLv2+ or GPLv2+ or MPLv1.1
 BuildRequires:  gcc-c++ autoconf automake libtool ncurses-devel gettext-devel
@@ -86,6 +88,9 @@ cp -a %{_libdir}/libhunspell-1.6.so* %{buildroot}%{_libdir}
 %lang(hu) %{_mandir}/hu/man1/hunspell.1.gz
 
 %changelog
+* Tue Mar  8 03:10:14 UTC 2022 - Qiang Wei <qiang.wei@suse.com> -1.7.0-10
+- Add format literal string to resolve g++ issue for format-security.
+
 * Fri Jan 07 2022 xingxing <xingxing9@huawei.com> - 1.7.0-9
 - resolve compile fail
 

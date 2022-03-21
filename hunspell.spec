@@ -1,7 +1,7 @@
 Name:           hunspell
 Summary:        A spell checker and morphological analyzer library
 Version:        1.7.0
-Release:        8
+Release:        9
 URL:            https://github.com/hunspell/hunspell
 Source:         https://github.com/hunspell/hunspell/archive/v%{version}.tar.gz
 
@@ -56,10 +56,8 @@ make check
 %make_install
 %delete_la_and_a
 mkdir $RPM_BUILD_ROOT/%{_datadir}/myspell
+ln -sf %{_libdir}/libhunspell-%{ver}.so.0.0.1 %{buildroot}%{_libdir}/libhunspell.so.0
 %find_lang %{name}
-
-#Include previous ABI version for temporary binary compatibility
-cp -a %{_libdir}/libhunspell-1.6.so* %{buildroot}%{_libdir}
 
 %ldconfig_scriptlets
 
@@ -86,6 +84,9 @@ cp -a %{_libdir}/libhunspell-1.6.so* %{buildroot}%{_libdir}
 %lang(hu) %{_mandir}/hu/man1/hunspell.1.gz
 
 %changelog
+* Mon Mar 21 2022 misaka00251 <misaka00251@misakanet.cn> - 1.7.0-9
+- Fix libhunspell-1.6.so.0 is not a symbolic link error.
+
 * Wed Jul 21 2021 yushaogui <yushaogui@huawei.com> - 1.7.0-8
 - delete a buildrequires for gdb
 
